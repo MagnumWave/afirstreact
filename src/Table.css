@@ -1,0 +1,34 @@
+.table-container{
+    transition: all 0.5s;
+}
+
+.table-starter {
+    opacity: 0;
+    background-color: red;
+    transform: scaleY(0);
+    transform-origin: top;
+    
+}
+
+.table-ender {
+    opacity: 1;
+    background-color: blue;
+    transform: scaleY(1);
+    transform-origin: top;
+}
+
+.t-nome {
+    width: 30%;
+}
+
+.t-mail {
+    width: 200px;
+}
+
+.t-phone {
+    width: 40%;
+}
+
+td {
+    border: white solid 2px;
+}

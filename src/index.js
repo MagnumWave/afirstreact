@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+// ReactDOM.render(<App color="fuchsia" />, document.getElementById('root'));
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App className="w-50" color="fuchsia" shape="round" />
   </React.StrictMode>,
   document.getElementById('root')
 );
