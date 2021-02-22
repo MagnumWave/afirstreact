@@ -1,9 +1,21 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import './App.css';
-import Table from './Table.js'
+import Table from './Table.js';
+
+const url = "https://api.github.com/users/MagnumWave";
 
 
 
+
+// let myFetcher;
+// var myCatcher;
+// myFetcher = fetch(url).then(response => response.json()).then(blab => {
+//   console.log(blab);
+//   myCatcher = JSON.stringify(blab.blog)
+  
+// }).catch(err => console.log(err));
+
+// console.log(myCatcher);
 class App extends React.Component {
   
 
@@ -12,8 +24,15 @@ class App extends React.Component {
     this.state = {
       color: this.props.color,
       displayShit: false,
-      start: 'table-starter'
+      start: 'table-starter',
+      login: '',
+      name: '',
+      id: '',
+      followers: '',
+      blog: '',
+      
     }
+    
   }
 
   shitChanger = (what) => {
@@ -24,6 +43,25 @@ class App extends React.Component {
     this.setState({displayShit: !this.state.displayShit})
   }
 
+  
+
+  shitLogger = () => {
+    console.log(this.state.catcher);
+  }
+
+  componentDidMount(){
+    fetch(url).then(response => response.json()).then(result => {
+      console.log(result);
+      this.setState({
+        login: result.login,
+        name: result.name,
+        id: result.id,
+        followers: result.followers,
+        blog: result.blog,
+      })
+    });
+  }
+
   render(){
     let incomingShit;
     if (this.state.displayShit){
@@ -31,6 +69,7 @@ class App extends React.Component {
     } else {
       incomingShit = <Table show={true}/>;
     }
+
     
 
     return(
@@ -46,8 +85,24 @@ class App extends React.Component {
           {incomingShit}
         </div>
         <p>click below to change that shit</p>
-        <button className="btn btn-danger rounded-pill shadow" onClick={() => this.shitChanger("red")}>Shit Changer</button>
+        <div className="d-flex flex-column w-25">
+          <button className="my-1 btn btn-danger rounded-pill shadow" onClick={() => this.shitChanger("red")}>Shit Changer</button>
+          <button className="my-1 btn btn-danger rounded-pill shadow" onClick={() => this.shitGetter()}>Shit Getter</button>
+          <button className="my-1 btn btn-danger rounded-pill shadow" onClick={() => this.shitLogger()}>Shit Logger</button>
+          <label>Login:</label>
+          <input type="text" value={this.state.login} disabled></input>
+          <label>Nome:</label>
+          <input type="text" value={this.state.name} disabled></input>
+          <label>ID:</label>
+          <input type="text" value={this.state.id} disabled></input>
+          <label>Seguidores:</label>
+          <input type="text" value={this.state.followers} disabled></input>
+          <label>Site:</label>
+          <input type="text" value={this.state.blog} disabled></input>
+        </div>
+        {/* <MeuHook/> */}
       </div>
+      
     );
   }
 }
